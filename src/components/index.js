@@ -8,6 +8,7 @@ import Button from "./Button";
 import Select from "./Select";
 import Postcard from "./Postcard";
 import Login from "./Login";
+import RTE from "./RTE";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   Select,
   Postcard,
   Login,
+  RTE,
 };
