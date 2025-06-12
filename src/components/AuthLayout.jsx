@@ -8,11 +8,17 @@ export default function Protected({ children, authentication = true }) {
   const authStatus = useSelector((state) => state.auth.status);
 
   useEffect(() => {
-    if (authentication !== authStatus) {
+    // if (authentication !== authStatus) {
+    //   navigate("/login");
+    // } else if (authentication === true && authStatus === true) {
+    //   navigate("/");
+    // } else navigate("/login");
+
+    if (authentication && authStatus !== authentication) {
       navigate("/login");
-    } else if (authentication === true && authStatus === true) {
+    } else if (!authentication && authStatus !== authentication) {
       navigate("/");
-    } else navigate("/login");
+    }
 
     setLoader(false);
   }, [authStatus, navigate, authentication]);

@@ -24,7 +24,7 @@ export class AuthService {
 
       if (userAccount) {
         // call another method
-        return this.login(email, password);
+        return this.login({ email, password });
       } else {
         return userAccount;
       }
@@ -52,10 +52,13 @@ export class AuthService {
     try {
       const acc = await this.account.get();
       if (acc) return acc;
-      else throw new Error("Error :: getCurrentUser:", acc);
+      else
+        throw new Error(
+          "Error :: getCurrentUser Error in getting account:",
+          acc
+        );
     } catch (error) {
       console.log("Appwrite service :: getCurrentUser :: error ", error);
-      throw error;
     }
   }
 

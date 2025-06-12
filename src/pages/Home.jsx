@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import service from "../Appwrite/config";
 import { Container, Postcard } from "../components";
+import { useSelector } from "react-redux";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const authStatus = useSelector((state) => state.auth.status);
 
   useEffect(() => {
     service.getPosts([]).then((posts) => {
@@ -20,7 +22,7 @@ function Home() {
           <div className="flex flex-wrap">
             <div className="p-2 w-full">
               <h1 className="text-2xl font-bold hover:text-gray-500">
-                Login to read posts
+                {authStatus ? "No post" : "Login to read posts"}
               </h1>
             </div>
           </div>
@@ -34,7 +36,7 @@ function Home() {
           <div className="flex flex-wrap">
             {posts.map((post) => (
               <div key={post.$id} className="p-2 w-1/4">
-                <Postcard {...post} />
+                <Postcard post={post} />
               </div>
             ))}
           </div>

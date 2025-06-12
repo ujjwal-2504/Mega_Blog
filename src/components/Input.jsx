@@ -1,6 +1,6 @@
-import React, { useId } from "react";
+import React, { useId, forwardRef } from "react";
 
-function Input({ label, type = "text", className = " ", ref, props }) {
+function Input({ label, type = "text", className = " ", ...rest }, ref) {
   const id = useId();
 
   return (
@@ -14,11 +14,11 @@ function Input({ label, type = "text", className = " ", ref, props }) {
         type={type}
         className={` px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full ${className}`}
         ref={ref}
-        {...props}
+        {...rest}
         id={id}
       />
     </div>
   );
 }
 
-export default Input;
+export default forwardRef(Input);

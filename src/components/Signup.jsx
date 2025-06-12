@@ -9,7 +9,11 @@ import { useForm } from "react-hook-form";
 function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [error, setError] = useState("");
 
   const signup = async (data) => {
@@ -48,7 +52,7 @@ function Signup() {
             to="/login"
             className="font-medium text-primary transition-all duration-200 hover:underline"
           >
-            Sign Up
+            Login
           </Link>
         </p>
 
@@ -71,10 +75,13 @@ function Signup() {
                 validate: {
                   matchPattern: (value) =>
                     /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/.test(value) ||
-                    "Email address must be a valid address",
+                    "Email address must be a valid",
                 },
               })}
             />
+            {errors.email && (
+              <p className="text-red-600 text-sm">{errors.email.message}</p>
+            )}
 
             <Input
               label="Password: "
@@ -99,6 +106,9 @@ function Signup() {
                 },
               })}
             />
+            {errors.password && (
+              <p className="text-red-600 text-sm">{errors.password.message}</p>
+            )}
 
             <Button type="submit" className="w-full">
               Create Account
